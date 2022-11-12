@@ -14,6 +14,7 @@ lang-asm:
   - static/modes/asm6502-mode.ts
 lang-c:
   - lib/compilers/cc65.js
+  - lib/compilers/llvm-mos.ts
   - lib/compilers/ellcc.js
   - lib/compilers/ewarm.js
   - lib/compilers/awavr.js
@@ -23,6 +24,7 @@ lang-c:
   - etc/config/c.*.properties
 lang-c++:
   - lib/compilers/ewarm.js
+  - lib/compilers/llvm-mos.ts
   - lib/compilers/awavr.js
   - etc/config/c++.*.properties
   - static/modes/cppp-mode.ts
