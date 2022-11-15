@@ -48,10 +48,13 @@ export class LLVMMosCompiler extends BaseCompiler {
 
 
     override optionsForFilter(filters, outputFilename) {
+        
+        filters.libraryCode = true;
+        
         if (filters.binary) {
             return ['-g', '-o', this.filename(outputFilename)];
         } else {
-            return ['-Wl,--lto-emit-asm', '-g', '-o', this.filename(outputFilename)];
+            return ['-g', '-Wl,--lto-emit-asm', '-o', this.filename(outputFilename)];
         }
     }
     
@@ -78,13 +81,13 @@ export class LLVMMosCompiler extends BaseCompiler {
 
     override async doBuildstepAndAddToResult(result: CompilationResult, name, command, args, execParams) {
         const stepResult = await super.doBuildstepAndAddToResult(result, name, command, args, execParams);
-        if (name === 'make') {
-            const mapFile = path.join(execParams.customCwd, 'map.txt');
-            if (await utils.fileExists(mapFile)) {
-                const file_buffer = await fs.readFile(mapFile);
-                stepResult.stderr = stepResult.stderr.concat(utils.parseOutput(file_buffer.toString()));
-            }
-        }
+        // if (name === 'make') {
+        //     const mapFile = path.join(execParams.customCwd, 'map.txt');
+        //     if (await utils.fileExists(mapFile)) {
+        //         const file_buffer = await fs.readFile(mapFile);
+        //         stepResult.stderr = stepResult.stderr.concat(utils.parseOutput(file_buffer.toString()));
+        //     }
+        // }
         return stepResult;
     }
 }
